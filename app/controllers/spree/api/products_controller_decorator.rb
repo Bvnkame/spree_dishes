@@ -1,6 +1,14 @@
 Spree::Api::ProductsController.class_eval do
 	before_action :authenticate_user, :except => [:index, :show]
 
+	def index
+    @products = Spree::Product.all
+		if params[:date_delivery]
+			@products = @products.where(date_delivery: params[:date_delivery])
+    end
+    render "spree/api/products/index", status: 200
+	end
+
 	def create
         authorize! :create, Spree::Product
         params[:product][:available_on] ||= Time.now
@@ -27,6 +35,8 @@ Spree::Api::ProductsController.class_eval do
        def update
         @product = find_product(params[:id])
         authorize! :update, @product
+
+    
         @product = @product.update(product_params)
 
         if @product.errors.empty?
