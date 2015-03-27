@@ -1,11 +1,11 @@
 object @product
 cache [I18n.locale, @current_user_roles.include?('admin'), current_currency, root_object]
 
-attributes :id, :name, :dish_type_id, :date_delivery, :cost_price, :currency, :story
+attributes :id, :name, :dish_type_id, :date_delivery, :currency, :story
 
 node(:time_cook) { |p| p.cooking_time }
 node(:dish_type){ |p| p.dish_type.name if p.dish_type }
-node(:display_price) { |p| p.display_price.to_s }
+node(:display_price) { |p| p.cost_price.to_s }
 node(:has_variants) { |p| p.has_variants? }
 node(:taxon_ids) { |p| p.taxon_ids }
 node(:difficulty) { |p| p.difficulty.name if p.difficulty}

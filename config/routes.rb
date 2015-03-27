@@ -2,6 +2,7 @@ Spree::Core::Engine.routes.draw do
   # Add your extension routes here
   namespace :api do
   	resources :difficulties
+    resources :dish_typies
   	resources :date_deliveries
   	resources :ingredients
   	resources :whatneeds

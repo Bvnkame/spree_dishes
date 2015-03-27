@@ -18,7 +18,7 @@ Spree::Product.class_eval do
 
     has_many :date_deliveries, :class_name => "Dish::DateDelivery"
 
-		belongs_to :dish_type
+		belongs_to :dish_type, :class_name => "Dish::DishType"
 		def set_master_variant_defaults
       p "build master"
       master.is_master = true
