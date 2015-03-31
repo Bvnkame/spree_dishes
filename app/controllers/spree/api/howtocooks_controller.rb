@@ -2,6 +2,11 @@ module Spree
 	module Api
 		class HowtocooksController < BaseApiController
 
+			def index
+				@howtocooks = Dish::Howtocook.all
+				render "spree/api/howtocooks/index"
+			end
+			
 			def create
 				authorize! :create, Dish::Howtocook
 				p Spree::PermittedAttributes::ATTRIBUTES

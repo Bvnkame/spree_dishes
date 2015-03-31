@@ -3,7 +3,7 @@ module Spree
 		class NutritionsController < BaseApiController
 			def index
 				@nutritions = Dish::Nutrition.all
-				respond_with(@nutritions)
+				render "spree/api/nutritions/index", status: 200
 			end
 
 			def create

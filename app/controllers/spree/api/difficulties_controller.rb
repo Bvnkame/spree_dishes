@@ -3,7 +3,7 @@ module Spree
 		class DifficultiesController < BaseApiController
 			def index
 				@difficulties = Dish::Difficulty.all
-				respond_with(@difficulties)
+				render "spree/api/difficulties/index"
 			end
 
 			def create

@@ -4,7 +4,7 @@ module Spree
 
 			def index
 				@ingredients = Dish::Ingredient.all
-				respond_with(@ingredients, :status => 200)
+				render "spree/api/ingredients/index", status: 200
 			end
 
 			def create

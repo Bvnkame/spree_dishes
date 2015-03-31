@@ -1,12 +1,12 @@
-module Bm
-  class Imagecover < Spree::Asset
+module Dish
+  class IngredientImage < Spree::Asset
     validate :no_attachment_errors
 
     has_attached_file :attachment,
                       styles: { mini: '60x60>', normal: '200x200>'},
                       default_style: :box,
-                      url: '/spree/dishes/:id/:style/:basename.:extension',
-                      path: ':rails_root/public/spree/dishes/:id/:style/:basename.:extension',
+                      url: '/spree/ingredients/:id/:style/:basename.:extension',
+                      path: ':rails_root/public/spree/ingredients/:id/:style/:basename.:extension',
                       convert_options: { all: '-strip -auto-orient -colorspace sRGB' }
     validates_attachment :attachment,
       :presence => true,

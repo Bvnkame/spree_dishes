@@ -2,6 +2,11 @@ module Spree
 	module Api
 		class ProductWhatneedsController < BaseApiController
 
+			def index
+				@whatneeds = product.whatneeds
+				render "spree/api/whatneeds/index"
+			end
+
 			def create
 				authorize! :create, Dish::ProductWhatneed
 				
@@ -24,6 +29,14 @@ module Spree
 
 			def whatneed_params
 				params.require(:whatneed).permit(:id)
+			end
+
+			def product_id
+				params[:product_id]
+			end
+
+			def product
+				Spree::Product.find(product_id)
 			end
 		end 
 	end

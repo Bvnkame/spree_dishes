@@ -3,7 +3,7 @@ module Spree
 		class DateDeliveriesController < BaseApiController
 			def index
 				@date_deliveries = Dish::DateDelivery.all
-				respond_with(@date_deliveries)
+				render "spree/api/date_deliveries/index"
 			end
 
 			def create

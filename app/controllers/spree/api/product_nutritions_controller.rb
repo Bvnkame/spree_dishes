@@ -2,6 +2,11 @@ module Spree
 	module Api
 		class ProductNutritionsController < BaseApiController
 
+			def index
+				@nutritions = product.nutritions
+				render "spree/api/nutritions/index"
+			end
+
 			def create
 				authorize! :create, Dish::ProductNutrition
 				
@@ -29,6 +34,14 @@ module Spree
 
 			def nutrition_params
 				params.require(:nutrition).permit(:id, :quantity, :unit)
+			end
+
+			def product_id
+				params[:product_id]
+			end
+
+			def product
+				Spree::Product.find(product_id)
 			end
 		end 
 	end

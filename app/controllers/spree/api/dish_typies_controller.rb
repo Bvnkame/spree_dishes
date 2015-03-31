@@ -4,7 +4,7 @@ module Spree
 
 			def index
 				@dish_typies = Dish::DishType.all
-				respond_with(@dish_typies, :status => 200)
+				render "spree/api/dish_typies/index"
 			end
 
 			def create
