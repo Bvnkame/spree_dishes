@@ -1,7 +1,7 @@
 object @product
 cache [I18n.locale, @current_user_roles.include?('admin'), current_currency, root_object]
 
-attributes :id, :name, :dish_type_id, :dish_price, :dish_currency, :story
+attributes :id, :name, :dish_type_id, :dish_price, :dish_currency, :story, :recipe_link
 
 child :date_deliveries => :date_deliveries do
   node(:date) { |p| p.delivery_date }
