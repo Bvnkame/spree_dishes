@@ -34,7 +34,8 @@ Spree::Api::ProductsController.class_eval do
         @product.save
         # p "save ok"
         if @product.persisted?
-          respond_with(@product, :status => 201, :default_template => :show)
+          @status = [ { "messages" => "Add Product Successful"}]
+            render "spree/api/logger/log"
         else
           invalid_resource!(@product)
         end
@@ -48,7 +49,8 @@ Spree::Api::ProductsController.class_eval do
         @product = @product.update(product_params)
 
         if @product.errors.empty?
-          respond_with(@product.reload, :status => 200, :default_template => :show)
+          @status = [ { "messages" => "Update Product Successful"}]
+            render "spree/api/logger/log", status: 201
         else
           invalid_resource!(@product)
         end

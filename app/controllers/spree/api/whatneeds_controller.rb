@@ -4,7 +4,7 @@ module Spree
 
 			def index
 				@whatneeds = Dish::Whatneed.all
-				respond_with(@whatneeds, :status => 200)
+        render "spree/api/whatneeds/index"
 			end
 
 			def create
