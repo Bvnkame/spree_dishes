@@ -2,7 +2,7 @@ Spree::Api::ProductsController.class_eval do
 	before_action :authenticate_user, :except => [:index, :show]
 
 	def index
-    @products = Spree::Product.all
+    @products = Spree::Product.all.ransack(params[:q]).result
     if params[:date_delivery]
      @products = @products.where(date_delivery: params[:date_delivery])
    end
