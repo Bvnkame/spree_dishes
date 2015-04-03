@@ -3,10 +3,12 @@ Spree::Api::ProductsController.class_eval do
 
 	def index
     @products = Spree::Product.all.ransack(params[:q]).result
-    if params[:date_delivery]
-     @products = @products.where(date_delivery: params[:date_delivery])
-   end
-   render "spree/api/products/index", status: 200
+    if params[:delivery_date]
+     @products = Spree::Product.select("spree_products.*, date_deliveries.delivery_date")
+                .joins(:date_deliveries).where(:date_deliveries => {:delivery_date => params[:delivery_date]}).uniq
+                .ransack(params[:q]).result
+    end
+    render "spree/api/products/index", status: 200
  end
 
  def show
