@@ -3,7 +3,7 @@ module Spree
 		class HowtocooksController < BaseApiController
 
 			def index
-				@howtocooks = Dish::Howtocook.all
+				@howtocooks = Dish::Howtocook.all.ransack(params[:q]).result
 				render "spree/api/howtocooks/index"
 			end
 			

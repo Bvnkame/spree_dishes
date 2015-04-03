@@ -2,7 +2,7 @@ module Spree
 	module Api
 		class NutritionsController < BaseApiController
 			def index
-				@nutritions = Dish::Nutrition.all
+				@nutritions = Dish::Nutrition.all.ransack(params[:q]).result
 				render "spree/api/nutritions/index", status: 200
 			end
 

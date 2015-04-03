@@ -2,7 +2,7 @@ module Spree
 	module Api
 		class DifficultiesController < BaseApiController
 			def index
-				@difficulties = Dish::Difficulty.all
+				@difficulties = Dish::Difficulty.all.ransack(params[:q]).result
 				render "spree/api/difficulties/index"
 			end
 

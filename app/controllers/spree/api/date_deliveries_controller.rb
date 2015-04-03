@@ -2,7 +2,7 @@ module Spree
 	module Api
 		class DateDeliveriesController < BaseApiController
 			def index
-				@date_deliveries = Dish::DateDelivery.all
+				@date_deliveries = Dish::DateDelivery.all.ransack(params[:q]).result
 				render "spree/api/date_deliveries/index"
 			end
 

@@ -3,7 +3,7 @@ module Spree
 		class WhatneedsController < BaseApiController
 
 			def index
-				@whatneeds = Dish::Whatneed.all
+				@whatneeds = Dish::Whatneed.all.ransack(params[:q]).result
         render "spree/api/whatneeds/index"
 			end
 

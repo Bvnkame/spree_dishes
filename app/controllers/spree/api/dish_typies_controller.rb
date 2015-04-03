@@ -3,7 +3,7 @@ module Spree
 		class DishTypiesController < BaseApiController
 
 			def index
-				@dish_typies = Dish::DishType.all
+				@dish_typies = Dish::DishType.all.ransack(params[:q]).result
 				render "spree/api/dish_typies/index"
 			end
 
