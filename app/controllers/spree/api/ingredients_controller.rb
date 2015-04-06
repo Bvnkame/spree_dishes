@@ -3,7 +3,11 @@ module Spree
 		class IngredientsController < BaseApiController
 
 			def index
-				@ingredients = Dish::Ingredient.all.ransack(params[:q]).result
+				if params[:ids]
+					@ingredients = Dish::Ingredient.accessible_by(current_ability, :read).where(id: params[:ids].split(','))
+				else
+					@ingredients = Dish::Ingredient.all.ransack(params[:q]).result
+				end
 				render "spree/api/ingredients/index", status: 200
 			end
 

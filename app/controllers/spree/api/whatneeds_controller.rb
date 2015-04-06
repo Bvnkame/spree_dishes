@@ -3,7 +3,11 @@ module Spree
 		class WhatneedsController < BaseApiController
 
 			def index
-				@whatneeds = Dish::Whatneed.all.ransack(params[:q]).result
+				if params[:ids]
+					@whatneeds = Dish::Whatneed.accessible_by(current_ability, :read).where(id: params[:ids].split(','))
+				else
+					@whatneeds = Dish::Whatneed.all.ransack(params[:q]).result
+				end
         render "spree/api/whatneeds/index"
 			end
 

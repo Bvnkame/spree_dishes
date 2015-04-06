@@ -2,7 +2,12 @@ module Spree
 	module Api
 		class NutritionsController < BaseApiController
 			def index
-				@nutritions = Dish::Nutrition.all.ransack(params[:q]).result
+				if params[:ids]
+					@nutritions = Dish::Nutrition.accessible_by(current_ability, :read).where(id: params[:ids].split(','))
+				else
+					@nutritions = Dish::Nutrition.all.ransack(params[:q]).result
+				end
+				
 				render "spree/api/nutritions/index", status: 200
 			end
 
