@@ -9,7 +9,6 @@ module Spree
 			
 			def create
 				authorize! :create, Dish::Howtocook
-				p Spree::PermittedAttributes::ATTRIBUTES
 				if find_product(howtocook_params[:product_id])
 					Dish::Howtocook.create(howtocook_params)
 					@status = [ { "messages" => "Add How to cook Successful"}]
