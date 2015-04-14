@@ -5,14 +5,14 @@ Spree::Api::ProductsController.class_eval do
     @products = Spree::Product.all.ransack(params[:q]).result
     if params[:delivery_date]
      @products = Spree::Product.select("spree_products.*, date_deliveries.delivery_date")
-                .joins(:date_deliveries).where(:date_deliveries => {:delivery_date => params[:delivery_date]}).uniq
-                .ransack(params[:q]).result
-    end
-    render "spree/api/products/index", status: 200
+     .joins(:date_deliveries).where(:date_deliveries => {:delivery_date => params[:delivery_date]}).uniq
+     .ransack(params[:q]).result
+   end
+   render "spree/api/products/index", status: 200
  end
 
  def show
-  @product = find_product(params[:id])
+  @product = Spree::Product.find(params[:id])
   expires_in 15.minutes, :public => true
   headers['Surrogate-Control'] = "max-age=#{15.minutes}"
   headers['Surrogate-Key'] = "product_id=1"
