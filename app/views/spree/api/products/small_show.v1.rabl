@@ -5,4 +5,4 @@ attributes :id, :name, :dish_type_id, :dish_currency, :dish_price
 
 node(:dish_type){ |p| p.dish_type.name if p.dish_type }
 
-child(:images => :images) { extends "spree/api/images/show" }
+child(:variant_images => :images) { extends "spree/api/images/show" }
