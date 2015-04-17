@@ -19,8 +19,7 @@ module Spree
 						end
 					end
 				end
-				@status = [ { "messages" => "Add Date Deliveries Successful"}]
-				render "spree/api/logger/log", status: 200
+				render "spree/api/date_deliveries/show", status: 200
 			end
 
 			private
