@@ -57,11 +57,23 @@ Spree::Api::ProductsController.class_eval do
 
   def duration
     if params[:start_date] && params[:end_date]
-      @product_date = Dish::DateDelivery.where(:delivery_date => params[:start_date]..params[:end_date]).select(:delivery_date).uniq
-      p "product date"
-      p @product_date
+      @product_date = Dish::DateDelivery.where(:delivery_date => params[:start_date]..params[:end_date]).select(:delivery_date).uniq.order(:delivery_date)
 
       render "spree/api/products/products_duration"
+    else
+      @status = [ { "messages" => "Missing Params start_date or end_date"}]
+      render "spree/api/logger/log", status: 400
+    end
+  end
+
+  def remove_delivery_date
+    if params[:delivery_date]
+      Dish::DateDelivery.delete_all(:product_id => params[:product_id], :delivery_date => params[:delivery_date])
+      @status = [ { "messages" => "Remove Successful"}]
+      render "spree/api/logger/log", status: 200
+    else
+      @status = [ { "messages" => "Missing Params delivery_date"}]
+      render "spree/api/logger/log", status: 400
     end
   end
 

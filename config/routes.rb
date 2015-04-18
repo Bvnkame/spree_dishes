@@ -17,5 +17,5 @@ Spree::Core::Engine.routes.draw do
   end
 
   get "/api/products_duration" => "api/products#duration"
-  
+  delete "/api/products/:product_id/remove_date" => "api/products#remove_delivery_date"
 end
