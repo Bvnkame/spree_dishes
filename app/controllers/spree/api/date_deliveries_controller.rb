@@ -12,8 +12,10 @@ module Spree
 					date_deliveries_params[:product_ids].split(",").flatten.each do |product_id|
 						@product = Spree::Product.find(product_id.to_i)
 						if @product
-							@date_delivery = Dish::DateDelivery.new(product_id: @product.id, delivery_date: date_deliveries_params["delivery_date"])
-							@date_delivery.save
+							unless Dish::DateDelivery.exists?(:product_id => @product.id, :delivery_date => date_deliveries_params["delivery_date"])
+								@date_delivery = Dish::DateDelivery.new(product_id: @product.id, delivery_date: date_deliveries_params["delivery_date"])
+								@date_delivery.save
+							end
 						else
 							invalid_resource!(@product)
 						end
