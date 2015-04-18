@@ -29,7 +29,7 @@ module Spree
 						@date_delivery.update(:delivery_date => params[:delivery_date])
 						render "spree/api/date_deliveries/show", status: 200
 					else
-						invalid_resource!(@product)
+						invalid_resource!(@date_delivery)
 					end
 				else
 					@status = [ { "messages" => "Missing Params delivery_date"}]
