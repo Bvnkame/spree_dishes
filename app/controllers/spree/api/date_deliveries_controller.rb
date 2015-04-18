@@ -22,6 +22,21 @@ module Spree
 				render "spree/api/date_deliveries/show", status: 200
 			end
 
+			def update
+				if params[:delivery_date]
+					@date_delivery = Dish::DateDelivery.find(params[:id])
+					if @date_delivery
+						@date_delivery.update(:delivery_date => params[:delivery_date])
+						render "spree/api/date_deliveries/show", status: 200
+					else
+						invalid_resource!(@product)
+					end
+				else
+					@status = [ { "messages" => "Missing Params delivery_date"}]
+					render "spree/api/logger/log", status: 400
+				end
+			end
+
 			private
 
 			def date_deliveries_params
