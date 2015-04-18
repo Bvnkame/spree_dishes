@@ -15,5 +15,7 @@ Spree::Core::Engine.routes.draw do
 
     end
   end
+
+  get "/api/products_duration" => "api/products#duration"
   
 end
