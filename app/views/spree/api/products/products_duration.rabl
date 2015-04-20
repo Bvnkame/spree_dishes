@@ -6,7 +6,7 @@ node { |p|
 		node(:pd_id) { |pro|
 			Dish::DateDelivery.find_id(pro.id, p.delivery_date)
 		}
-		attributes :name
+		attributes :id, :name
 		child(:variant_images => :images) { extends "spree/api/images/show" }
 	end
 }
