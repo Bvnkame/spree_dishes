@@ -21,9 +21,6 @@ Spree::Product.class_eval do
     belongs_to :dish_type, :class_name => "Dish::DishType"
 
 
-
-    has_many :ingredient_images, :class_name => "Dish::IngredientImage"
-
     accepts_nested_attributes_for :product_nutritions, allow_destroy: true, reject_if: lambda { |pp| pp[:nutrition_name].blank? }
   
 	def self.product_of_date(date)
