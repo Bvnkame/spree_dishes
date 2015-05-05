@@ -1,6 +1,6 @@
 object false
 node(:count) { @ingredients.count }
 child(@ingredients => :ingredients) do
-  extends "spree/api/ingredient/show"
+  extends "spree/api/ingredients/show"
 end
 
