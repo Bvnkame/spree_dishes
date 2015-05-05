@@ -4,7 +4,7 @@ module Dish
 
     has_attached_file :attachment,
                       styles: { mini: '60x60>', normal: '200x200>'},
-                      default_style: :box,
+                      default_style: :ingredient,
                       url: '/spree/ingredients/:id/:style/:basename.:extension',
                       path: ':rails_root/public/spree/ingredients/:id/:style/:basename.:extension',
                       convert_options: { all: '-strip -auto-orient -colorspace sRGB' }
