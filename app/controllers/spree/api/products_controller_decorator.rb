@@ -1,5 +1,5 @@
 Spree::Api::ProductsController.class_eval do
-	before_action :authenticate_user, :except => [:index, :show, :duration]
+	before_action :authenticate_user, :except => [:index, :show, :duration, :full]
 
 	def index
     @products = Spree::Product.all.ransack(params[:q]).result
@@ -7,6 +7,14 @@ Spree::Api::ProductsController.class_eval do
      @products = Spree::Product.product_of_date(params[:delivery_date]).ransack(params[:q]).result
    end
    render "spree/api/products/index", status: 200
+ end
+
+ def full
+    @products = Spree::Product.all.ransack(params[:q]).result
+    if params[:delivery_date]
+     @products = Spree::Product.product_of_date(params[:delivery_date]).ransack(params[:q]).result
+   end
+   render "spree/api/products/index_full", status: 200
  end
 
  def show
