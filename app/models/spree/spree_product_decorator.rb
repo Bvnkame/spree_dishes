@@ -27,4 +27,36 @@ Spree::Product.class_eval do
 		Spree::Product.select("spree_products.*, date_deliveries.delivery_date")
 		.joins(:date_deliveries).where(:date_deliveries => {:delivery_date => date }).uniq
 	end
+
+	def copy_data_whatneed(product)
+		array = Dish::ProductWhatneed.where(product_id: product.id)
+			array.each do |w|
+				tam = Dish::ProductWhatneed.new
+				tam.product_id = self.id
+				tam.whatneed_id = w.whatneed_id
+				tam.save!
+			end
+		end
+		def copy_data_nutrition(product)
+			array = Dish::ProductNutrition.where(product_id: product.id)
+				array.each do |w|
+					tam = Dish::ProductNutrition.new
+					tam.product_id = self.id
+					tam.nutrition_id = w.nutrition_id
+					tam.quantity = w.quantity
+					tam.unit = w.unit
+					tam.save!
+			end
+		end
+
+		def copy_data_howtocook(product)
+			product.howtocooks.each do |w|
+				tam = Dish::Howtocook.new
+				tam.position = w.position
+				tam.title = w.title
+				tam.content = w.content
+				tam.product_id = self.id
+				tam.save!
+			end
+		end
 end
