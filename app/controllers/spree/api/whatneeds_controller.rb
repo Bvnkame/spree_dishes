@@ -5,8 +5,10 @@ module Spree
 			def index
 				if params[:ids]
 					@whatneeds = Dish::Whatneed.accessible_by(current_ability, :read).where(id: params[:ids].split(','))
-				else
+				elsif params[:q]
 					@whatneeds = Dish::Whatneed.where("lower(name) like ?", "%#{params[:q].downcase}%")
+				else
+					@whatneeds = Dish::Whatneed.all
 				end
         render "spree/api/whatneeds/index"
 			end

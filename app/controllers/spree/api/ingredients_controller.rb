@@ -5,8 +5,10 @@ module Spree
 			def index
 				if params[:ids]
 					@ingredients = Dish::Ingredient.accessible_by(current_ability, :read).where(id: params[:ids].split(','))
-				else
+				elsif params[:q]
 					@ingredients = Dish::Ingredient.where("lower(name) like ?", "%#{params[:q].downcase}%")
+				else 
+					@ingredients = Dish::Ingredient.all
 				end
 				render "spree/api/ingredients/index", status: 200
 			end
