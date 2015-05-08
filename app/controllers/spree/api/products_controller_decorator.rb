@@ -67,7 +67,7 @@ Spree::Api::ProductsController.class_eval do
   end
 
   def remove_delivery_date
-    @product = find_product(params[:product_id])
+    @product = Spree::Product.find(params[:product_id])
     authorize! :update, @product
     if params[:delivery_date]
       Dish::DateDelivery.delete_all(:product_id => params[:product_id], :delivery_date => params[:delivery_date])
