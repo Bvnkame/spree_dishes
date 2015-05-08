@@ -11,9 +11,6 @@ Spree::Api::ProductsController.class_eval do
 
   def show
     @product = Spree::Product.find(params[:id])
-    expires_in 15.minutes, :public => true
-    headers['Surrogate-Control'] = "max-age=#{15.minutes}"
-    headers['Surrogate-Key'] = "product_id=1"
     render "spree/api/products/show", status: 200
   end
 
@@ -65,7 +62,7 @@ Spree::Api::ProductsController.class_eval do
   end
 
   def remove_delivery_date
-    @product = Spree::Product.find(params[:product_id])
+    @product = Spree::Pro(params[:product_id])
     authorize! :update, @product
     if params[:delivery_date]
       Dish::DateDelivery.delete_all(:product_id => params[:product_id], :delivery_date => params[:delivery_date])
