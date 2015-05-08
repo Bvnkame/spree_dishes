@@ -27,6 +27,8 @@ module Spree
 			def update
 				if params[:delivery_date]
 					@date_delivery = Dish::DateDelivery.find(params[:id])
+					authorize! :update, @date_delivery
+					
 					if @date_delivery
 						@date_delivery.update(:delivery_date => params[:delivery_date])
 						render "spree/api/date_deliveries/show", status: 200

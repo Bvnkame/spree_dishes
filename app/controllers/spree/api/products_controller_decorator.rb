@@ -43,8 +43,6 @@ Spree::Api::ProductsController.class_eval do
   def update
     @product = find_product(params[:id])
     authorize! :update, @product
-
-    
     @product.update(product_params)
 
     if @product.update(product_params)
