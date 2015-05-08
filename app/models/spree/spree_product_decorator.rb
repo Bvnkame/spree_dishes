@@ -14,7 +14,7 @@ Spree::Product.class_eval do
 
 	has_many :howtocooks, :class_name => "Dish::Howtocook"
 
-	has_one :expert_one, :class_name => "Bm::Expert", foreign_key: 'bm_expert_id'
+	belongs_to :expert_one, :class_name => "Bm::Expert", foreign_key: 'bm_expert_id'
 
 	has_many :date_deliveries, :class_name => "Dish::DateDelivery"
 
