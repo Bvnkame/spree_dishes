@@ -14,7 +14,7 @@ node(:difficulty) { |p| p.difficulty.name if p.difficulty}
 child(:variant_images => :images) { extends "spree/api/images/show" }
 
 child :ingredients => :whatwesends do
-	attributes *ingredient_attributes
+	extends "spree/api/ingredients/show"
 end
 
 child :whatneeds => :whatneeds do
