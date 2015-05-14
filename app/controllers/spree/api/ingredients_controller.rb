@@ -6,7 +6,7 @@ module Spree
 				if params[:ids]
 					@ingredients = Dish::Ingredient.accessible_by(current_ability, :read).where(id: params[:ids].split(','))
 				else
-					@ingredients = Dish::Ingredient.where('name like ?', '#{%params[:q]%}')
+					@ingredients = Dish::Ingredient.where("name like ?", "%#{params[:q]}%")
 				end
 				render "spree/api/ingredients/index", status: 200
 			end
