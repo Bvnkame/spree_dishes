@@ -24,7 +24,7 @@ Spree::Product.class_eval do
 	accepts_nested_attributes_for :product_nutritions, allow_destroy: true, reject_if: lambda { |pp| pp[:nutrition_name].blank? }
 
 	def self.product_of_date(date)
-		Spree::Product.select("spree_products.*, date_deliveries.delivery_date").joins(:date_deliveries).where(:date_deliveries => {:delivery_date => "2015-05-11" }).uniq.order(:dish_type_id)
+		Spree::Product.select("spree_products.*, date_deliveries.delivery_date").joins(:date_deliveries).where(:date_deliveries => {:delivery_date => date }).uniq.order(:dish_type_id)
 	end
 
 	def copy_data_whatneed(product)
