@@ -5,7 +5,7 @@ module Spree
 				if params[:ids]
 					@nutritions = Dish::Nutrition.accessible_by(current_ability, :read).where(id: params[:ids].split(','))
 				else
-					@nutritions = Dish::Nutrition.all.ransack(params[:q]).result
+					@nutritions = Dish::Nutrition.where("lower(name) like ?", "%#{params[:q].downcase}%")
 				end
 				
 				render "spree/api/nutritions/index", status: 200
